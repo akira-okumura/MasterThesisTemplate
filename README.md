@@ -14,7 +14,7 @@
 $ brew cask install mactex
 ```
 
-これで、MacTeX が入るはずです。MacTeX は A4 ではなく letter サイズが標準になっているので、これを A4 に変更します。
+これで、MacTeX が入るはずです（2017 年 2 月現在、2016 年版が入ります）。MacTeX は A4 ではなく letter サイズが標準になっているので、これを A4 に変更します。
 
 ```
 $ sudo tlmgr paper a4
@@ -27,4 +27,15 @@ $ cd /usr/local/texlive/2016/texmf-dist/scripts/cjk-gs-integrate
 $ sudo perl cjk-gs-integrate.pl --link-texmf --force
 $ sudo mktexlsr    
 $ sudo kanji-config-updmap-sys hiragino-elcapitan-pron
+```
+## レポジトリのクローンと PDF ファイルの出力
+LaTeX 環境が整ったら、このレポジトリを自分の Mac にクローンします。好きな場所で作業して構いません。
+```
+$ git clone https://github.com/akira-okumura/MasterThesisTemplate
+```
+次に、`make` コマンドを実行して LaTeX をコンパイルし PDF を出力します。`main.pdf` というファイルができるはずですので、これを開いてください。
+```
+$ cd MasterThesisTemplate
+$ make
+$ open main.pdf
 ```
