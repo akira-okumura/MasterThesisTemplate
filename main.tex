@@ -1,0 +1,52 @@
+\documentclass[twoside,openright]{jsbook}
+
+% jsbookで余白が広すぎるのを直す
+% 参照 https://oku.edu.mie-u.ac.jp/~okumura/jsclasses/
+\setlength{\textwidth}{\fullwidth}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+\usepackage{thesis_cover}
+
+\usepackage[deluxe]{otf} % OTFフォントを使えるようにし、複数のウェイトも使用可能にする
+%\usepackage{harvard} % jecon.bibで必要
+\usepackage[dvipdfmx]{graphicx} % 画像の取り扱いに必要
+\usepackage{multicol} % 表でセルを複数列で結合する
+
+\usepackage{natbib} % citep や citet を有効にする
+\setcitestyle{aysep={}} % (Okumura, 2009) などを (Okumura 2009) とする
+
+\title{添削者を困らせることのない修士論文の書き方の研究} % 論文題目
+\date{\today} % 日付（入れたくなければ空欄）
+\heisei{28} % 年度
+\StudentIdNumber{123456} % 学籍番号
+\author{奥村 曉} % 氏名
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\include{Abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+% include を使うことで、別ファイルに分割することができます。
+\include{Introduction}
+\include{Review}
+\include{WhatYouDid}
+\include{Discussion}
+\include{Conclusion}
+\include{Appendix}
+\include{Acknowledgments}
+
+%\addcontentsline{toc}{chapter}{引用文献}
+\renewcommand{\bibname}{引用文献}
+\bibliographystyle{jecon}
+\bibliography{thesis}
+
+\end{document}

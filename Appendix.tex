@@ -1,0 +1,28 @@
+\chapter*{付録} % 章番号を出さない
+\addcontentsline{toc}{chapter}{付録} % 目次に載せる
+
+「付録」（appendix）は、論文の本文に載せるには情報として邪魔もしくは必須ではないものの、読者にとって有益となるような情報を載せます。付録を必要としない論文ももちろん存在しますので、そこは著者の判断です。
+
+例えば、たくさんの観測データを様々なモデルでフィットした場合、フィット結果の絵がたくさん出てくるはずです。そのような図は本文中に大量に出されても大切な情報を見失ってしまいますので、大部分は付録に載せることが推奨されます。他には、何かしらの長い式変形や証明を載せる必要がある場合、付録に移動する場合があります。
+
+% 付録は chapter の 1 つとして作りますが、章番号は表示しません。
+% また付録の 1 つずつはアルファベットで番号付けをするのが一般的です。
+\setcounter{section}{0} % section の番号をゼロにリセットする
+\renewcommand{\thesection}{\Alph{section}} % 数字ではなくアルファベットで数える
+\setcounter{equation}{0} % 式番号を A.1 のようにする
+\renewcommand{\theequation}{\Alph{section}.\arabic{equation}}
+\setcounter{figure}{0} % 図番号
+\renewcommand{\thefigure}{\Alph{section}.\arabic{figure}}
+\setcounter{table}{0} % 表番号
+\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
+
+\section{すごい長い証明}
+式~(\ref{eq})のように、式番号がアルファベットとアラビア数字の組み合わせになるように、\LaTeX{}ソース中で設定してありますので、中身を眺めてみてください。
+
+\begin{equation}
+  \label{eq}
+  1 + 1 = 2
+\end{equation}
+
+
+\section{すごいたくさんのフィットの図}

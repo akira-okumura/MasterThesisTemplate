@@ -1,0 +1,68 @@
+\makeatletter
+
+\def\StudentIdNumber#1{\def\@StudentIdNumber{#1}}
+\def\heisei#1{\def\@heisei{#1}}
+\def\department#1{\def\@department{#1}}
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \let\footnote\thanks
+    \null\vfil
+    \vskip 60\p@
+    \begin{center}%
+      {\Large 平成 \@heisei 年度　修士論文 \par}%
+      \vskip 10em%
+      {\LARGE \@title \par}%
+      \vskip 10em%
+      {\large
+        \begin{tabular}[t]{c}%
+          名古屋大学大学院理学研究科\\
+          素粒子宇宙物理学専攻宇宙地球物理系\\
+          宇宙線物理学研究室
+        \end{tabular}\par}%
+      \vskip 5em%
+      {\large
+        \begin{tabular}[t]{c}%
+          博士課程（前期課程）2年\\
+          学籍番号 \@StudentIdNumber \\
+          \\
+            {\Large \@author}
+        \end{tabular}\par}%
+      \vskip 1.5em
+      {\large \@date \par}%
+    \end{center}%
+    \par
+    \@thanks\vfil\null
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}%
+
+%% \def\@maketitle{
+%% \begin{center}
+%% {\huge あああ\@thesis \par} %修士論文と記載される部分
+%% \vspace{10mm}
+%% {\LARGE\bf いいい\@title \par}% 論文のタイトル部分
+%% \vspace{10mm}
+%% {\Large ううう\@date\par}	% 提出年月日部分
+%% \vspace{20mm}
+%% {\Large \@department \par}	% 所属部分
+%% {\Large 学籍番号　\@StudentIdNumber \par}	% 学籍番号部分
+%% \vspace{10mm}
+%% {\large \@author}% 氏名 
+%% \end{center}
+%% \par\vskip 1.5em
+%% }
+
+\makeatother
