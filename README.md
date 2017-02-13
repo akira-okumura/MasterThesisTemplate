@@ -28,6 +28,9 @@ $ sudo perl cjk-gs-integrate.pl --link-texmf --force
 $ sudo mktexlsr    
 $ sudo kanji-config-updmap-sys hiragino-elcapitan-pron
 ```
+
+Linux への日本語 LaTeX 環境構築は、ここ何年も自分がやった経験がないので、適当に検索してください。RHEL 系列であれば、yum で導入できるはずです。
+
 ## レポジトリのクローンと PDF ファイルの出力
 LaTeX 環境が整ったら、このレポジトリを自分の Mac にクローンします。好きな場所で作業して構いません。
 ```
@@ -39,3 +42,4 @@ $ cd MasterThesisTemplate
 $ make
 $ open main.pdf
 ```
+※ `open` コマンドは Mac 特有のものです。
