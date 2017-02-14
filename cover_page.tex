@@ -1,0 +1,19 @@
+% このファイルは、バインダに貼り付けるための表紙を作成します
+\documentclass[oneside]{jsbook}
+
+% jsbookで余白が広すぎるのを直す
+% 参照 https://oku.edu.mie-u.ac.jp/~okumura/jsclasses/
+\setlength{\textwidth}{\fullwidth}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+\usepackage{thesis_cover} % ISEE 用の表紙テンプレ
+
+\usepackage[deluxe]{otf} % OTFフォントを使えるようにし、複数のウェイトも使用可能にする
+
+\include{AuthorInfo} % 氏名などの情報
+\seifuku{正本} % 正本用
+% \seifuku{副本} % 副本用
+
+\begin{document}
+\maketitle
+\end{document}
