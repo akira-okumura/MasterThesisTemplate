@@ -4,7 +4,10 @@ EXTRACTBB := extractbb
 BIB := pbibtex
 
 MAIN := main
+COVER := cover_page
 TEXS := $(wildcard *.tex)
+TEXS := $(filter-out $(COVER).tex, $(TEXS))
+
 STYS := $(wildcard *.sty)
 FIGS := $(wildcard fig/*)
 
@@ -18,7 +21,7 @@ BBL  := $(MAIN).bbl
 
 .PHONY: all clean
 
-all: $(MAIN).pdf
+all: $(MAIN).pdf $(COVER).pdf
 
 %.xbb: %.pdf
 	$(EXTRACTBB) $<
@@ -31,6 +34,9 @@ all: $(MAIN).pdf
 
 $(BBL): $(MAIN).aux thesis.bib jecon.bst
 	$(BIB) $(MAIN)
+
+$(COVER).dvi: $(COVER).tex AuthorInfo.tex $(STYS)
+	$(TEX)	$(COVER)
 
 $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(SRCS) $(XBBS) $(BBL)
 	$(TEX)	$(MAIN)
@@ -45,8 +51,11 @@ $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(SRCS) $(XBBS) $(BBL)
 		$(TEX) $(MAIN);\
 	fi
 
+$(COVER).pdf: $(COVER).dvi
+	$(DVIPDFMX) $^
+
 $(MAIN).pdf: $(MAIN).dvi
 	$(DVIPDFMX) $^
 
 clean:
-	rm -f $(MAIN).pdf $(MAIN).dvi *.aux $(MAIN).log $(MAIN).lot $(MAIN).lof $(MAIN).out $(MAIN).toc tex/*.aux *~ src/*~ tex/*~ $(XBBS) $(MAIN).bbl $(MAIN).blg
+	rm -f *.pdf *.dvi *.aux *.log *.lot *.lof *.out *.toc tex/*.aux *~ src/*~ tex/*~ $(XBBS) *.bbl *.blg

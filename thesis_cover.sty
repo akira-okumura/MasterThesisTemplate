@@ -1,8 +1,8 @@
 \makeatletter
 
-\def\StudentIdNumber#1{\def\@StudentIdNumber{#1}}
-\def\heisei#1{\def\@heisei{#1}}
-\def\department#1{\def\@department{#1}}
+\def\StudentIdNumber#1{\def\@StudentIdNumber{#1}} % 学籍番号
+\def\heisei#1{\def\@heisei{#1}} % 平成での年度
+\def\seifuku#1{\def\@seifuku{#1}} % 正本か副本か
 
 \renewcommand{\maketitle}{%
   \begin{titlepage}%
@@ -10,12 +10,13 @@
     \let\footnoterule\relax
     \let\footnote\thanks
     \null\vfil
-    \vskip 60\p@
+    \vskip 20\p@
     \begin{center}%
       {\Large 平成 \@heisei 年度　修士論文 \par}%
-      \vskip 10em%
+      {\Large \@seifuku \par}%
+      \vskip 12em%
       {\LARGE \@title \par}%
-      \vskip 10em%
+      \vskip 15em%
       {\large
         \begin{tabular}[t]{c}%
           名古屋大学大学院理学研究科\\
@@ -48,21 +49,5 @@
   \global\let\date\relax
   \global\let\and\relax
 }%
-
-%% \def\@maketitle{
-%% \begin{center}
-%% {\huge あああ\@thesis \par} %修士論文と記載される部分
-%% \vspace{10mm}
-%% {\LARGE\bf いいい\@title \par}% 論文のタイトル部分
-%% \vspace{10mm}
-%% {\Large ううう\@date\par}	% 提出年月日部分
-%% \vspace{20mm}
-%% {\Large \@department \par}	% 所属部分
-%% {\Large 学籍番号　\@StudentIdNumber \par}	% 学籍番号部分
-%% \vspace{10mm}
-%% {\large \@author}% 氏名 
-%% \end{center}
-%% \par\vskip 1.5em
-%% }
 
 \makeatother
