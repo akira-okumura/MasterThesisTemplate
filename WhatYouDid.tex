@@ -38,6 +38,33 @@
 
 \texttt{figure}環境で図を挿入する場所は、初めてその図を言及する段落の直後、もしくは直前です。あまりに離れた場所に図を挿入すると読者はどこに図があるかを探さなくてはならず、読むのが困難になるからです。
 
+場合によっては複数の図を並べたいこともあるでしょう。そのようなときは、\texttt{minipage}環境を使って図~\ref{fig_minipage}のようにすることができます。
+
+\begin{figure}
+  \begin{minipage}[b]{.5\linewidth}
+    \leftline{(a)}
+    \centering
+    \includegraphics[width=8cm]{fig/histogram.pdf}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \leftline{(b)}
+    \centering
+    \includegraphics[width=8cm]{fig/histogram.pdf}
+  \end{minipage}
+  \begin{minipage}[b]{.5\linewidth}
+    \leftline{(c)}
+    \centering
+    \includegraphics[width=8cm]{fig/histogram.pdf}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \leftline{(d)}
+    \centering
+    \includegraphics[width=8cm]{fig/histogram.pdf}
+  \end{minipage}
+  \caption{複数の図を並べた例。(a)ガウシアンフィット。(b)同じもの。(c)これも同じもの。(d)これも同じもの。}
+  \label{fig_minipage}
+\end{figure}
+
 \section{表の使い方}
 
 表~\ref{tab_cta}に、\LaTeX{}でどのように表を作成するかの例を示します。実際にどういう \LaTeX{}コードがこの表に対応するのかは、ファイルの中身を眺めてください。
