@@ -16,6 +16,15 @@
 \usepackage{lineno} % 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
 \linenumbers
 % \usepackage[dvipdfmx]{hyperref} % PDF 内でリンクを生成したい場合に使う（好みによる）
+\usepackage[utf8]{inputenc} % ウムラウトなどを直接入力できるようにする \"{o} を ö と直接入力しても問題ない。
+\usepackage[T1]{fontenc} % OT1→T1に変更し、ウムラウトなどを PDF 出力で合成文字ではなくす
+
+% newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
+\makeatletter
+\newcommand{\ion}[2]{#1$\;${\small\rmfamily\@Roman{#2}}\relax}%
+\makeatother
+\newcommand{\HI}{\mbox{\ion{H}{1}}} % 中性原子ガス（HI 領域）の例
+\newcommand{\bs}{\symbol{92}} % backslash
 
 \include{AuthorInfo} % 氏名などの情報
 
