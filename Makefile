@@ -1,4 +1,4 @@
-TEX := platex
+TEX := uplatex
 DVIPDFMX := dvipdfmx
 EXTRACTBB := extractbb
 BIB := pbibtex

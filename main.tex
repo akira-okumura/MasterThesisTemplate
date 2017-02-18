@@ -1,13 +1,15 @@
-\documentclass[twoside,openright]{jsbook}
+\documentclass[twoside,openright,uplatex]{jsbook}
+% uplatex オプションを指定し、ユニコード対応に。ただだし、uplatex でコンパイルすること。
 
 % jsbookで余白が広すぎるのを直す
 % 参照 https://oku.edu.mie-u.ac.jp/~okumura/jsclasses/
 \setlength{\textwidth}{\fullwidth}
 \setlength{\evensidemargin}{\oddsidemargin}
 
-\usepackage{thesis_cover} % ISEE 用の表紙テンプレ
+\usepackage{thesis_cover} % 同梱の ISEE 用の表紙テンプレ
 
-\usepackage[deluxe]{otf} % OTFフォントを使えるようにし、複数のウェイトも使用可能にする
+\usepackage[deluxe]{otf} % OTFフォントを使えるようにし、複数のウェイトも使用可能にする。これがないと、Mac のヒラギノ環境で使われる角ゴが太すぎてしまう。
+\usepackage[T1]{fontenc} % OT1→T1に変更し、ウムラウトなどを PDF 出力で合成文字ではなくす
 \usepackage[dvipdfmx]{graphicx} % 画像の取り扱いに必要
 \usepackage{multicol} % 表でセルを複数列で結合する
 \usepackage{amsmath} % 数式の機能を拡張
@@ -16,8 +18,6 @@
 \usepackage{lineno} % 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
 \linenumbers
 % \usepackage[dvipdfmx]{hyperref} % PDF 内でリンクを生成したい場合に使う（好みによる）
-\usepackage[utf8]{inputenc} % ウムラウトなどを直接入力できるようにする \"{o} を ö と直接入力しても問題ない。
-\usepackage[T1]{fontenc} % OT1→T1に変更し、ウムラウトなどを PDF 出力で合成文字ではなくす
 
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
