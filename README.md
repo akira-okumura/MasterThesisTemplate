@@ -43,3 +43,5 @@ $ make
 $ open main.pdf
 ```
 ※ `open` コマンドは Mac 特有のものです。
+
+この`Makefile`の中では、LaTeX のコンパイルに`uplatex`を使用します。TeX Live や MacTeX などを導入すれば同梱されていると思います。
