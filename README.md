@@ -4,7 +4,7 @@
 
 このテンプレートで得られる修士論文の出力例は、PDF で[ここ](https://github.com/akira-okumura/MasterThesisTemplate/releases/download/v1.0.0/main.pdf)から見ることができます。宇宙地球環境研究所の学生向けと言っても、表紙のテンプレートがそのようになっているだけですので、他大学の学生の参考にもなると思います。`thesis_cover.sty` をちょこちょこっと編集すれば、好きな大学院用に変更できます。
 
-テンプレートとしての役割以外に、LaTeX を使う上での注意点や、日本語の書き方の注意点を含んでいます。より細かい注意点は、[修士論文や夏の学校の集録や学振申請書を書く皆さんへ (書き方、注意点、心得)](http://oxon.hatenablog.com/entry/20130615/1371228320)を併せて参照してください。またこのテンプレート中の LaTeX コードをよく読み、どのように LaTeX を使えば注意して学んでください。
+テンプレートとしての役割以外に、LaTeX を使う上での注意点や、日本語の書き方の注意点を含んでいます。より細かい注意点は、[修士論文や夏の学校の集録や学振申請書を書く皆さんへ (書き方、注意点、心得)](http://oxon.hatenablog.com/entry/20130615/1371228320)を併せて参照してください。またこのテンプレート中の LaTeX コードをよく読み、どのように LaTeX を使えば良いか、注意して学んでください。
 
 ## Mac への LaTeX の導入
 もし Homebrew が入っていないようであれば、[Homebrew](https://brew.sh/index_ja.html) を入れてください。
@@ -45,3 +45,10 @@ $ open main.pdf
 ※ `open` コマンドは Mac 特有のものです。
 
 この`Makefile`の中では、LaTeX のコンパイルに`uplatex`を使用します。TeX Live や MacTeX などを導入すれば同梱されていると思います。
+
+Mac の場合、[TeXShop](http://pages.uoregon.edu/koch/texshop/) を使うのを好む人もいるようなので、好みに応じて TeXShop でファイルを編集してください（TeXShop は Homebrew の MacTeX で一緒にインストールされます）。このテンプレートを使う場合は `platex` ではなく `uplatex` を使うように、TeXShop の環境設定を変更する必要があります。
+
+また、`open main.pdf` というコマンドでは Preview や Acrobat Reader で PDF ファイルが開かれると思います。PDF の更新のたびに自動的に PDF を開き直したい場合は、[Skim](http://skim-app.sourceforge.net) を使うのが便利です。その場合は次のようにします。
+```
+$ open -a Skim main.pdf
+```
