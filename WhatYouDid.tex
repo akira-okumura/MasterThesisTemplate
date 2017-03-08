@@ -38,34 +38,31 @@
 
 \texttt{figure}環境で図を挿入する場所は、初めてその図を言及する段落の直後、もしくは直前です。あまりに離れた場所に図を挿入すると読者はどこに図があるかを探さなくてはならず、読むのが困難になるからです。
 
-場合によっては複数の図を並べたいこともあるでしょう。そのようなときは、\texttt{minipage}環境を使って図~\ref{fig_minipage}のようにすることができます。
+場合によっては複数の図を並べたいこともあるでしょう。そのようなときは、\texttt{subfigure}環境を使って図~\ref{fig_subfigure}のようにすることができます。\texttt{minipage}環境でも似たようなことができますが、\texttt{subfigure}を使うと小番号を自動で付与したり、「図~\ref{fig_subfigure_b}」のように、小番号を参照することができます。
 
 \begin{figure}
-  \begin{minipage}[b]{.5\linewidth} % 図の最大幅は 1 行の幅の 0.5 倍
-    \leftline{(a)}
-    \centering
-    \includegraphics[width=8cm]{fig/histogram.pdf} % これが大きすぎると図が重なる
-  \end{minipage}% }の直後に%を置くことで、改行をさせない（図(b)を改行させない0）。
-  \begin{minipage}[b]{.5\linewidth}
-    \leftline{(b)}
-    \centering
-    \includegraphics[width=8cm]{fig/histogram.pdf}
-  \end{minipage}
-  \begin{minipage}[b]{.5\linewidth}
-    \leftline{(c)}
-    \centering
-    \includegraphics[width=8cm]{fig/histogram.pdf}
-  \end{minipage}%
-  \begin{minipage}[b]{.5\linewidth}
-    \leftline{(d)}
-    \centering
-    \includegraphics[width=8cm]{fig/histogram.pdf}
-  \end{minipage}
+  \centering
+  \subfigure[]{% {の直後に%を置くことで、改行をさせない（図(b)を改行させない）。
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_a}%
+  }%
+  \subfigure[]{%
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_b}%
+  }
+  \subfigure[]{%
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_c}%
+  }%
+  \subfigure[]{%
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_d}%
+  }
   \caption[複数の図を並べた例]{複数の図を並べた例。(a)ガウシアンフィット。(b)同じもの。(c)これも同じもの。(d)これも同じもの。}
-  \label{fig_minipage}
+\label{fig_subfigure}
 \end{figure}
 
-またせっかく図の並べ方が分かったので、同じ図をPDF、PNG、JPEGにして図~\ref{fig_formats}にて比較してみましょう。それぞれの画像の特徴が分かります。
+またせっかく図の並べ方が分かったので、同じ図をPDF、PNG、JPEGにして図~\ref{fig_formats}にて比較してみましょう。それぞれの画像の特徴が分かります。また図~\ref{fig_formats}は参考のため\texttt{subfigure}ではなく\texttt{minipage}環境を使って作ってあります。
 
 \begin{figure}
   \begin{minipage}[b]{.3333\linewidth}

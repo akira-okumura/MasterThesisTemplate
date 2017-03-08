@@ -6,18 +6,39 @@
 \setlength{\textwidth}{\fullwidth}
 \setlength{\evensidemargin}{\oddsidemargin}
 
-\usepackage{thesis_cover} % 同梱の ISEE 用の表紙テンプレ
+% 同梱の ISEE 用の表紙テンプレ
+\usepackage{thesis_cover}
 
-\usepackage[deluxe]{otf} % OTFフォントを使えるようにし、複数のウェイトも使用可能にする。これがないと、Mac のヒラギノ環境で使われる角ゴが太すぎてしまう。
-\usepackage[T1]{fontenc} % OT1→T1に変更し、ウムラウトなどを PDF 出力で合成文字ではなくす
-\usepackage[dvipdfmx]{graphicx} % 画像の取り扱いに必要
-\usepackage{multicol} % 表でセルを複数列で結合する
-\usepackage{amsmath} % 数式の機能を拡張
-\usepackage{natbib} % citep や citet を有効にする
-\setcitestyle{aysep={}} % (Okumura, 2009) などを (Okumura 2009) とする
-\usepackage{lineno} % 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
-\linenumbers
-% \usepackage[dvipdfmx]{hyperref} % PDF 内でリンクを生成したい場合に使う（好みによる）
+% OTFフォントを使えるようにし、複数のウェイトも使用可能にする。これがないと、Mac のヒラギノ環境で使われる角ゴが太すぎてしまう。
+\usepackage[deluxe]{otf}
+
+% OT1→T1に変更し、ウムラウトなどを PDF 出力で合成文字ではなくす
+\usepackage[T1]{fontenc}
+
+% 画像の取り扱いに必要
+\usepackage[dvipdfmx]{graphicx}
+
+% 表でセルを複数列で結合する
+\usepackage{multicol}
+
+% 数式の機能を拡張
+\usepackage{amsmath}
+
+% citep や citet を有効にする
+\usepackage{natbib}
+
+% (Okumura, 2009) などを (Okumura 2009) とする
+\setcitestyle{aysep={}}
+
+% subfigure 環境で、(a)、(b) などの番号を左上に表示する。宇宙系の分野ではこれが一般的なはず。
+\usepackage[FIGTOPCAP,nooneline]{subfigure}
+
+% 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
+%\usepackage{lineno}
+%\linenumbers
+
+% PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
+% \usepackage[dvipdfmx]{hyperref}
 
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
@@ -26,7 +47,8 @@
 \newcommand{\HI}{\mbox{\ion{H}{1}}} % 中性原子ガス（HI 領域）の例
 \newcommand{\bs}{\symbol{92}} % backslash
 
-\include{AuthorInfo} % 氏名などの情報
+% 氏名などの情報が入っているファイル。各自で編集。
+\include{AuthorInfo}
 
 \begin{document}
 
