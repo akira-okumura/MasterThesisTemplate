@@ -51,6 +51,11 @@ $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(SRCS) $(XBBS) $(BBL)
 		$(TEX) $(MAIN);\
 	fi
 
+	if egrep 'There were undefined citations.' $(MAIN).log;\
+	then\
+		$(TEX) $(MAIN);\
+	fi
+
 $(COVER).pdf: $(COVER).dvi
 	$(DVIPDFMX) $^
 
