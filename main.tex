@@ -37,7 +37,9 @@
 \usepackage{natbib}
 
 % (Okumura, 2009) などを (Okumura 2009) とする
-\setcitestyle{aysep={}}
+% 日本語文章で全角丸括弧の表示にし、かつ \inhibitglue で役物同士の字間を適切にする。
+% https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2349
+\setcitestyle{aysep={},notesep={},open={\inhibitglue（},close={）\inhibitglue}}
 
 % subfigure 環境で、(a)、(b) などの番号を左上に表示する。宇宙系の分野ではこれが一般的なはず。
 \usepackage[nooneline]{subfigure}
