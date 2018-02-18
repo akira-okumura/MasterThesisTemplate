@@ -1,0 +1,48 @@
+\documentclass[oneside,a4paper,papersize,uplatex]{jsarticle}
+
+% 修論本体と表紙で共通で必要となる設定
+\input{preamble}
+
+% 画像の取り扱いに必要
+\usepackage[dvipdfmx]{graphicx}
+
+% 任意の場所に文字を表示する
+\usepackage{tikz}
+
+\include{AuthorInfo} % 氏名などの情報
+
+\usepackage{wallpaper} % 出力文書の背景に画像を入れる
+
+% Word の論文要旨テンプレートを埋め込む
+\ULCornerWallPaper{1}{fig/ISEE_abstract.pdf}
+
+\setlength{\topmargin}{-20mm}
+\setlength{\oddsidemargin}{-10mm}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\makeatletter
+
+\begin{tikzpicture}
+  %\node (author) at (10, -2) {\@author};
+  \draw (0, 0) node { };
+  \draw (6.0, -0.9) node {\Huge{\@heisei}};
+  \draw (12.8,-3.32) node {\large{\@author}};
+  \draw (12.8,-2.55) node {\large{\@labname}};
+  \draw (5.2,-4.1) node {\large{\@supervisor}};
+  \draw (13.7,-4.1) node {\large{\@cosupervisor}};
+  \draw (4.7,-3.32) node {\large{\@StudentIdNumber}};
+  \draw (11.0,-5.4) node[text width=10cm] {\LARGE{\@title}};
+  \draw (0.25,-6.4) node[anchor=north west, text width=16.1cm] {
+    \begin{minipage}{16.1cm}
+      \parindent=1zw
+      \input{Abstract}
+    \end{minipage}
+  };
+\end{tikzpicture}
+
+\makeatother
+
+\end{document}
