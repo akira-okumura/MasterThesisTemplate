@@ -8,7 +8,7 @@ ABST := ISEE_abstract
 COVER := cover_page
 COVER2 := cover_page_copy
 TEXS := $(wildcard *.tex)
-TEXS := $(filter-out $(COVER).tex, $(TEXS))
+TEXS := $(filter-out $(COVER).tex $(COVER)2.tex $(ABST).tex, $(TEXS))
 
 STYS := $(wildcard *.sty)
 FIGS := $(wildcard fig/*)
@@ -46,7 +46,7 @@ $(COVER).dvi: $(COVER).tex AuthorInfo.tex $(STYS)
 $(COVER2).dvi: $(COVER2).tex AuthorInfo.tex $(STYS)
 	$(TEX)	$(COVER2)
 
-$(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(SRCS) $(XBBS) $(BBL)
+$(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(XBBS) $(BBL)
 	$(TEX)	$(MAIN)
 
 	if egrep 'No file $(MAIN).toc.' $(MAIN).log;\
