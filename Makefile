@@ -4,6 +4,7 @@ EXTRACTBB := extractbb
 BIB := pbibtex
 
 MAIN := main
+ABST := ISEE_abstract
 COVER := cover_page
 COVER2 := cover_page_copy
 TEXS := $(wildcard *.tex)
@@ -22,7 +23,7 @@ BBL  := $(MAIN).bbl
 
 .PHONY: all clean
 
-all: $(MAIN).pdf $(COVER).pdf $(COVER2).pdf
+all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
 
 %.xbb: %.pdf
 	$(EXTRACTBB) $<
@@ -35,6 +36,9 @@ all: $(MAIN).pdf $(COVER).pdf $(COVER2).pdf
 
 $(BBL): $(MAIN).aux thesis.bib jecon.bst
 	$(BIB) $(MAIN)
+
+$(ABST).dvi: $(ABST).tex AuthorInfo.tex $(STYS)
+	$(TEX)	$(ABST)
 
 $(COVER).dvi: $(COVER).tex AuthorInfo.tex $(STYS)
 	$(TEX)	$(COVER)
@@ -59,6 +63,9 @@ $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(SRCS) $(XBBS) $(BBL)
 	then\
 		$(TEX) $(MAIN);\
 	fi
+
+$(ABST).pdf: $(ABST).dvi
+	$(DVIPDFMX) $^
 
 $(COVER).pdf: $(COVER).dvi
 	$(DVIPDFMX) $^

@@ -30,7 +30,7 @@
 %\linenumbers
 
 % PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
-% \usepackage[dvipdfmx]{hyperref}
+\usepackage[dvipdfmx]{hyperref}
 
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
@@ -38,6 +38,7 @@
 \makeatother
 \newcommand{\HI}{\mbox{\ion{H}{1}}} % 中性原子ガス（HI 領域）の例
 \newcommand{\bs}{\symbol{92}} % backslash
+\newcommand{\red}[1]{\textcolor{red}{#1}}
 
 % 氏名などの情報が入っているファイル。各自で編集。
 \include{AuthorInfo}
@@ -48,7 +49,16 @@
 
 \maketitle
 
-\include{Abstract}
+% これを入れることでページ番号が表示されない。
+\thispagestyle{empty}
+
+% abstract 環境は jsbook では「概要」と表示してくれないため、手動で表示させる。
+% 参照 http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2121
+\begin{center}
+  {\large \sf 概要}
+\end{center}
+
+\input{Abstract}
 
 \tableofcontents
 \listoffigures
@@ -60,6 +70,7 @@
 \include{Introduction}
 \include{Review}
 \include{WhatYouDid}
+\include{Plagiarism}
 \include{Discussion}
 \include{Conclusion}
 \include{Appendix}
@@ -68,5 +79,6 @@
 \renewcommand{\bibname}{引用文献}
 \bibliographystyle{jecon}
 \bibliography{thesis}
+\label{page:bib}
 
 \end{document}
