@@ -1,0 +1,207 @@
+\chapter{\LaTeX{}の使い方}
+本章では、\LaTeX{}の使い方を以下説明します。\textbf{\textsf{ここでの表示例は本PDFを読むだけではどのような\LaTeX{}コードに対応しているか分かりませんので、\texttt{main.tex}や\texttt{WhatYouDid.tex}の中身を参照してください。}}
+
+このPDF文書中に\texttt{command}のような書体で記載されているものは、\LaTeX{}ソース中で実際に入力するコマンドやファイル名を示しています。
+
+\section{節の使い方}
+\texttt{\bs{}section}や\texttt{\bs{}subsection}を使うと「節」（section）と呼ばれる構造を作ることができます。長い章を分割して論理展開を分かりやすくする目的で使います。
+
+文中で節を参照するときは、\texttt{section}であっても\texttt{subsection}であっても「節」と呼び、「\ref{sec_figure}~節」や「第\ref{sec_figure}~節」のように書きます（\texttt{ref}コマンドの使用は次節参照）。章を参照するときは「\ref{chap_review}~章」や「第\ref{chap_review}~章」とします。
+
+\section{図の使い方}
+\label{sec_figure} % このようにラベルをつけることで、\refコマンドで節や図の番号を参照できます。
+
+論文中に図を入れるときは、\texttt{figure}環境を使用します。画像形式は図~\ref{fig_CTA}のようなJPEG（主に写真などに最適）やPNG（色数の少ない画像に最適）に加え、図~\ref{fig_histogram}のようにPDF（グラフなどに最適）も使うことができます。実際の使い方は、この\LaTeX{}のコードを読んでください。\textsf{\textbf{EPS形式はいまどき誰も使いません。古い\LaTeX{}の本や年寄りに騙されないでください。}}
+
+\begin{figure} % 特に強い理由がない限り、[htbp]のような指定はしないでください。
+  \centering
+  % 図の横幅をちょうど良い具合に自分で調整します。
+  % 図中の文字を読めないような大きさにはしないでください。
+  \includegraphics[width=14cm]{fig/CTA.jpg}
+  % 図の説明が長い場合、[]で囲むことで短い図の説明を目次のみに表示できます。
+  \caption[CTAの完成想像図]{CTAの完成想像図（画像提供：G.~Pérez、IAC、SMM）。JPEG（ビットマップ画像）なので、出力PDFで拡大するとドットが見えます。}
+  % これで本文中から参照できます。
+  \label{fig_CTA}
+\end{figure}
+
+\begin{figure}
+  \centering
+  % PDFも使えます。
+  \includegraphics[width=14cm]{fig/histogram.pdf}
+  \caption[ガウシアンでヒストグラムをフィットした例]{ガウシアンでヒストグラムをフィットした例。PDF（ベクター画像）なので、出力PDFで拡大しても滑らかです。また文字列もPDF中で検索することができます。}
+  \label{fig_histogram}
+\end{figure}
+
+図を文中で参照したいときは\texttt{ref}コマンドを使用して、「図~\ref{fig_CTA}」のようにすることができます。この部分は\LaTeX{}中で実際には\texttt{図\~{}\bs{}ref\{fig\_CTA\}}と書いています。「図」と\texttt{\bs{}ref}の間に\texttt{\~{}}を入れるのは、「図」と図番号の間で改行を防ぐためです\footnote{このようにチルダを入れる手法は、人名の姓名の間や数値と単位の間で改行を防ぐのにも広く使われます。}。
+
+\texttt{figure}環境で図を挿入する場所は、初めてその図を言及する段落の直後、もしくは直前です。あまりに離れた場所に図を挿入すると読者はどこに図があるかを探さなくてはならず、読むのが困難になるからです。
+
+場合によっては複数の図を並べたいこともあるでしょう。そのようなときは、\texttt{subfigure}環境を使って図~\ref{fig_subfigure}のようにすることができます。\texttt{minipage}環境でも似たようなことができますが、\texttt{subfigure}を使うと小番号を自動で付与したり、「図~\ref{fig_subfigure_b}」のように、小番号を参照することができます。
+
+\begin{figure}
+  \centering
+  \subfigure[]{% {の直後に%を置くことで、改行をさせない（図(b)を改行させない）。
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_a}%
+  }%
+  \subfigure[]{%
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_b}%
+  }
+  \subfigure[]{%
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_c}%
+  }%
+  \subfigure[]{%
+    \includegraphics[width=.5\textwidth,clip]{fig/histogram.pdf}%
+    \label{fig_subfigure_d}%
+  }
+  \caption[複数の図を並べた例]{複数の図を並べた例。(a)ガウシアンフィット。(b)同じもの。(c)これも同じもの。(d)これも同じもの。}
+\label{fig_subfigure}
+\end{figure}
+
+またせっかく図の並べ方が分かったので、同じ図をPDF、PNG、JPEGにして図~\ref{fig_formats}にて比較してみましょう。それぞれの画像の特徴が分かります。また図~\ref{fig_formats}は参考のため\texttt{subfigure}ではなく\texttt{minipage}環境を使って作ってあります。
+
+\begin{figure}
+  \begin{minipage}[b]{.3333\linewidth}
+    \leftline{(a)}
+    \centering
+    \includegraphics[width=5.5cm]{fig/histogram.pdf}
+  \end{minipage}%
+  \begin{minipage}[b]{.3333\linewidth}
+    \leftline{(b)}
+    \centering
+    \includegraphics[width=5.5cm]{fig/histogram.png}
+  \end{minipage}%
+  \begin{minipage}[b]{.3333\linewidth}
+    \leftline{(c)}
+    \centering
+    \includegraphics[width=5.5cm]{fig/histogram.jpg}
+  \end{minipage}
+  \caption[異なる画像形式の比較]{異なる画像形式の比較。(a) PDF形式。拡大しても綺麗であり、文字も検索やコピーができる。(b) PNG形式。拡大するとビットマップ画像であることが分かる。文字を選択できない。(c) JPEG形式。PNGに比べ、JPEG圧縮特有のブロックノイズ、モスキートノイズが発生しており非常に汚いことが分かる。}
+  \label{fig_formats}
+\end{figure}
+
+\section{表の使い方}
+
+表~\ref{tab_cta}に、\LaTeX{}でどのように表を作成するかの例を示します。実際にどういう \LaTeX{}コードがこの表に対応するのかは、ファイルの中身を眺めてください。
+
+\begin{table} % 表も[htbp]のような場所指定は特に必要ない
+  \centering
+  % 表のキャプションは必ずその表の上に来ます。図の場合は下です。違いに気をつけてください。
+  \caption{CTA で使用される望遠鏡の性能諸元}
+  \footnotesize % 横幅のある表なので、文字サイズを小さくしています。通常は必要ありません。
+  \label{tab_cta} % ラベルのつけ方は図と同様です。
+  \begin{tabular}{lccccccc} % 列が何列あるかを示します。lcrはそれぞれ左・中央・右揃えの指定です。
+    \hline
+    &
+    \shortstack{大口径望遠鏡 \\ Large-Sized Telescope \\ (LST)} &
+    % 複数列を結合したいときは、multicolumnを使います。
+    \multicolumn{2}{c}{\shortstack{中口径望遠鏡 \\ Medium-Sized Telescope \\ (MST)}} &
+    \shortstack{SC 中口径望遠鏡 \\ Schwarzschild--Couder MST \\ (SC-MST)} &
+    \multicolumn{3}{c}{\shortstack{小口径望遠鏡 \\ Smalle-Sized Telescope \\ (SST)}} \\
+    & & FlashCam & NectarCAM & & GCT & ASTRI & 1M-SST \\
+    \hline
+    エネルギー範囲 & 20--200 GeV & \multicolumn{2}{c}{100 GeV -- 10 TeV} & 200 GeV -- 10 TeV & \multicolumn{3}{c}{5--300 TeV} \\
+台数（北半球）& 4 & \multicolumn{2}{c}{15} & 0 & \multicolumn{3}{c}{0} \\
+台数（南半球）& 4 & \multicolumn{2}{c}{24} & 24 & \multicolumn{3}{c}{70--90} \\
+鏡直径 &	23~m & \multicolumn{2}{c}{12~m} & 9.7~m & 4~m & 4~m & 4~m \\
+焦点距離 & 28~m & \multicolumn{2}{c}{16~m} & 5.6~m & 2.3~m & 2.15~m & 5.6~m \\
+視野 & 4.5$^\circ$ & \multicolumn{2}{c}{7.7$^\circ$} & 8$^\circ$ & 8.6$^\circ$ & 9.6$^\circ$ & 9$^\circ$ \\
+光学系 & 放物鏡 & \multicolumn{2}{c}{Davies--Cotton (DC)} & Schwarzschild--Couder (SC) & SC & SC & DC \\
+画素数 & 1,855 & 1,764 & 1,855 & 11,328 & 2,048 & 1,984 & 1,296\\
+\hline
+  \end{tabular}
+  \normalsize % 文字サイズを元に戻します
+\end{table}
+
+論文中で使う表の一般的な注意点として、あまり罫線をたくさん使いすぎないことです。日本では全てのセルの周辺に罫線を使う傾向があり、最悪、表~\ref{tab_cta_bad}のようになります。窮屈になるので、このような罫線の多用はやめましょう。
+
+\begin{table}
+  \centering
+  \caption{表~\ref{tab_cta}の悪い例}
+  \footnotesize
+  \label{tab_cta_bad}
+  \begin{tabular}{|l|c|cc|c|ccc|}
+    \hline
+    &
+    \shortstack{大口径望遠鏡 \\ Large-Sized Telescope \\ (LST)} &
+    % 複数列を結合したいときは、multicolumnを使います。
+    \multicolumn{2}{c|}{\shortstack{中口径望遠鏡 \\ Medium-Sized Telescope \\ (MST)}} &
+    \shortstack{SC 中口径望遠鏡 \\ Schwarzschild--Couder MST \\ (SC-MST)} &
+    \multicolumn{3}{c|}{\shortstack{小口径望遠鏡 \\ Smalle-Sized Telescope \\ (SST)}} \\
+    \hline
+    & & FlashCam & NectarCAM & & GCT & ASTRI & 1M-SST \\
+    \hline
+    エネルギー範囲 & 20--200 GeV & \multicolumn{2}{c|}{100 GeV -- 10 TeV} & 200 GeV -- 10 TeV & \multicolumn{3}{c|}{5--300 TeV} \\
+    \hline
+    台数（北半球）& 4 & \multicolumn{2}{c|}{15} & 0 & \multicolumn{3}{c|}{0} \\
+    \hline
+    台数（南半球）& 4 & \multicolumn{2}{c|}{24} & 24 & \multicolumn{3}{c|}{70--90} \\
+    \hline
+    鏡直径 &	23~m & \multicolumn{2}{c|}{12~m} & 9.7~m & 4~m & 4~m & 4~m \\
+    \hline
+    焦点距離 & 28~m & \multicolumn{2}{c|}{16~m} & 5.6~m & 2.3~m & 2.15~m & 5.6~m \\
+    \hline
+    視野 & 4.5$^\circ$ & \multicolumn{2}{c|}{7.7$^\circ$} & 8$^\circ$ & 8.6$^\circ$ & 9.6$^\circ$ & 9$^\circ$ \\
+    \hline
+    光学系 & 放物鏡 & \multicolumn{2}{c|}{Davies--Cotton (DC)} & Schwarzschild--Couder (SC) & SC & SC & DC \\
+    \hline
+    画素数 & 1,855 & 1,764 & 1,855 & 11,328 & 2,048 & 1,984 & 1,296\\
+    \hline
+  \end{tabular}
+  \normalsize % 文字サイズを元に戻します
+\end{table}
+
+\section{数式の使い方}
+
+\LaTeX{}を使う理由のひとつが、数式を綺麗に出力できるというのがあります。例えば中性パイ中間子$\pi^0$のガンマ線への二体崩壊であれば
+\begin{equation}
+  \pi^0 \rightarrow \gamma + \gamma
+\end{equation}
+のように書けますし、もっとややこしい数式も色々と書けますが、詳細は「LaTeX 数式」などでインターネット上で検索してください。この例のように、本文中に数式を入れるときは\texttt{\$\$}でその式を囲み、独立した行に数式を書くときは\texttt{equation}や\texttt{align}\footnote{\texttt{amsmath}パッケージで使用可能です。}環境を使ってください。
+
+\subsection{斜体と立体}
+数式を書くときには「斜体」（italic）と「立体」（upright）の違いに気をつけてください。基本的に数式は斜体を使って書きます。何も考えずに\LaTeX{}を使えば全て斜体になります。
+
+ただし、次の2つの式を見比べてみてください。
+\begin{equation}
+  e^{ix}=cosx + isinx
+  \label{eq_italic}
+\end{equation}
+\begin{equation}
+  \mathrm{e}^{\mathrm{i}x}=\cos x + \mathrm{i}\sin x
+  \label{eq_upright}
+\end{equation}
+式~\ref{eq_italic}は全ての文字が斜体で書かれていますが、式~\ref{eq_upright}は$x$以外は立体です。このように、いくつかの文字では立体を使うのが一般的です。例えば$\log$、$\sin$、$\mathrm{e}$（自然対数の底）、$\mathrm{i}$（虚数単位）、$\mathrm{d}$（微分作用素）などは、それぞれ\texttt{\bs{}log}、\texttt{\bs{}sin}、\texttt{\bs{}mathrm\{e\}}、\texttt{\bs{}mathrm\{i\}}、\texttt{\bs{}mathrm\{d\}}などと入力することで書くことができます\footnote{自然対数の底や虚数単位の場合は、分野や国によって斜体にするかどうかの違いがあります。また微分作用素は斜体で$d$とする場合もありますが、立体にすることで長さを表すのに頻繁に使われる変数$d$と区別する効果があります。}。
+
+ここで\texttt{\bs{}mathrm}というコマンドが出てきましたが、これは数式中で文字を立体にするためのコマンドです。特定の文字を立体にするときだけでなく、変数名の添字を立体するときにも使います。例えばトリガー回数を示す変数は$N_\mathrm{trigger}$などと書くことがあると思いますが、このときに「trigger」の部分は変数ではありませんので、斜体にしません。
+
+\subsection{単位}
+数式中に単位を使うとき、\texttt{\bs{}mathrm}を使わずに$100 MeV$などとしてしまう間違いもよく見られます。このように斜体になったものは変数$M$と$e$と$V$の掛け算であり、単位ではありません。また100MeVのように単位と数値の間にスペースのない書き方をする人も見かけますが、これも間違いです。本文中に書くときは\texttt{100\~{}MeV}とし、\texttt{equation}環境中では\texttt{100\bs{} \bs{}mathrm\{MeV\}}と書きます\footnote{余計なバックスラッシュとスペースは、数字と単位の間にスペースを入れるためです。}。
+
+\LaTeX{}では\texttt{\%}の後ろをコメントとして扱いますので、95\%のようにパーセントの表示をしたい場合には\texttt{95\bs{}\%}のように書きます。\%と数値の間にスペースを入れるかどうかは、流派が2つありますが、私の周りでは入れない人が多いようです\footnote{入れない理由としては、\%は単位ではなく0.01という数だから、というものが挙げられます。}。
+
+\section{引用の仕方}
+
+研究や論文というのは過去に誰かのやった研究を前提として新たに何かを進歩させるためにあります\footnote{「巨人の肩の上に立つ」とよく表現されます。}。しかしあなたの修士論文に全ての過去の研究を書くことはできませんので、引用という形式を使い他の論文をその事実の出典とします。
+
+ここで、「引用」と日本語で書いた場合には「quotation」と「citation」の2つの英語に翻訳され得ますが、我々の論文で通常用いるのは「citation」のほうです。著作権法などで問題になるのは「quotation」のほうなので、間違えないようにしてください。
+
+\LaTeX{}で\texttt{citep}コマンドや\texttt{citet}コマンドを使って論文を引用（cite）するときは、例えば次のようになります。
+
+\begin{quote} % ここで LaTeX の体裁を整えるために quote コマンドを使っていますが、ここは「引用」（quote）しているわけではりません。
+  宇宙線の全粒子スペクトルは図 XX に示すように$10^9$~eVから$10^{20}$~eVまでおよそ$-3$乗の冪で減少している\citep{Swordy2001}。$10^{12}$~eV（1~TeV）付近のガンマ線は超高エネルギーガンマ線と呼ばれ、様々な観測手法が提案されている\citep[例えば][を見よ]{Okumura2005}。この\citet{Okumura2005}の手法では\ldots
+% 複数の文献を一度に引用するには \citep{Swordy2001,Okumura2005}とすることもできます。
+\end{quote}
+ここでは引用（cite）を3回しており、それぞれ\texttt{citep}、\texttt{citep}、\texttt{citet}コマンドを使っています。
+
+\section{\BibTeX{}の使用}
+このテンプレートの場合、\pageref{page:bib}ページに「引用文献」という箇所があります。このページを手作業で間違いなく整形するのは面倒です。手でやる代わりに\BibTeX{}という仕組みを使います。\texttt{thesis.bib}というファイルに引用文献の必要な情報が書かれていますので、これを参考にして\BibTeX{}ファイルを作るか、論文をダウンロードするときに\texttt{.bib}ファイルもダウンロードできますので、それを使ってください\footnote{近年は「文献管理ソフト」と呼ばれるものが発達していますので、特に博士進学する学生は好きなものを入れてみてください。}。
+
+\section{ヨーロッパ圏の人名など}
+ウムラウトなどの混じったヨーロッパ圏の人名を入力するには、例えばシュレーディンガーの場合、\LaTeX{}では\texttt{Shr\bs{}"\{o\}dinger}と入力することでShr\"{o}dingerと表示すると\LaTeX{}の教科書には書いてあります。しかしいちいちこんなことをするのは面倒ですので、\texttt{main.tex}に書いてある\texttt{\bs{}usepackage[utf8]\{inputenc\}}を使うことで、直接ウムラウトつきの文字を\LaTeX{}のソース中に書いてしまって問題ありません。「ö」と「\"{o}」は、この\LaTeX{}ソース中では違う入力方法で書かれていますが、出力は同一です。
+
+\section{\texttt{newcommand}}
+
+入力が長く、論文中で何度も繰り返し使うような入力はコマンドとして登録することができます。例えば\texttt{\bs{}HI\{\}}や\texttt{\bs{}bs\{\}}といったコマンドを\texttt{main.tex}で定義しており、これらの結果は「\HI{}」や「\bs{}」と表示されます。
