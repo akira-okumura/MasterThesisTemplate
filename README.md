@@ -14,20 +14,13 @@
 $ brew cask install mactex
 ```
 
-これで、MacTeX が入るはずです（2017 年 2 月現在、2016 年版が入ります）。MacTeX は A4 ではなく letter サイズが標準になっているので、これを A4 に変更します。
+これで、MacTeX が入るはずです（2017 年 2 月現在、2016 年版が入ります）。MacTeX は A4 ではなく letter サイズが標準になっているので、これを A4 に変更します（OS を英語環境にしているときだけかもしれません）。
 
 ```
 $ sudo tlmgr paper a4
 ```
     
-次に出力される PDF にヒラギノフォントが埋め込まれるようにします。これをやらないと、作成した修士論文の見た目が、PDF を開く環境によって変わってしまいます（相手環境のフォントの有無で表示フォントが変わるため）。
-
-```
-$ cd /usr/local/texlive/2016/texmf-dist/scripts/cjk-gs-integrate
-$ sudo perl cjk-gs-integrate.pl --link-texmf --force
-$ sudo mktexlsr    
-$ sudo kanji-config-updmap-sys hiragino-elcapitan-pron
-```
+次に出力される PDF にヒラギノフォントが埋め込まれるようにします。これをやらないと、作成した修士論文の見た目が、PDF を開く環境によって変わってしまいます（相手環境のフォントの有無で表示フォントが変わるため）。この作業は macOS のバージョンや MacTeX のバージョンに依存するため、http://doratex.hatenablog.jp/entry/20180501/1525144736 を参照して作業を進めてください。
 
 Linux への日本語 LaTeX 環境構築は、ここ何年も自分がやった経験がないので、適当に検索してください。RHEL 系列であれば、yum で導入できるはずです。
 
