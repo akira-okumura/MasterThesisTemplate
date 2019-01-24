@@ -5,6 +5,7 @@ BIB := pbibtex
 
 MAIN := main
 ABST := ISEE_abstract
+PRE := preamble
 COVER := cover_page
 COVER2 := cover_page_copy
 TEXS := $(wildcard *.tex)
@@ -37,13 +38,13 @@ all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
 $(BBL): $(MAIN).aux thesis.bib jecon.bst
 	$(BIB) $(MAIN)
 
-$(ABST).dvi: $(ABST).tex AuthorInfo.tex $(STYS)
+$(ABST).dvi: $(ABST).tex AuthorInfo.tex $(STYS) $(PRE).tex
 	$(TEX)	$(ABST)
 
-$(COVER).dvi: $(COVER).tex AuthorInfo.tex $(STYS)
+$(COVER).dvi: $(COVER).tex AuthorInfo.tex $(STYS) $(PRE).tex
 	$(TEX)	$(COVER)
 
-$(COVER2).dvi: $(COVER2).tex AuthorInfo.tex $(STYS)
+$(COVER2).dvi: $(COVER2).tex AuthorInfo.tex $(STYS) $(PRE).tex
 	$(TEX)	$(COVER2)
 
 $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(XBBS) $(BBL)
