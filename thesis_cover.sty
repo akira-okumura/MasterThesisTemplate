@@ -1,7 +1,7 @@
 \makeatletter
 
 \def\StudentIdNumber#1{\def\@StudentIdNumber{#1}} % 学籍番号
-\def\heisei#1{\def\@heisei{#1}} % 平成での年度
+\def\reiwa#1{\def\@reiwa{#1}} % 平成での年度
 \def\seifuku#1{\def\@seifuku{#1}} % 正本か副本か
 \def\supervisor#1{\def\@supervisor{#1}} % 指導教員
 \def\cosupervisor#1{\def\@cosupervisor{#1}} % 副指導教員
@@ -15,7 +15,7 @@
     \null\vfil
     \vskip 20\p@
     \begin{center}%
-      {\Large 平成 \@heisei 年度　修士論文 \par}%
+      {\Large 令和{\@reiwa}年度　修士論文 \par}%
       {\Large \@seifuku \par}%
       \vskip 12em%
       {\LARGE \@title \par}%
