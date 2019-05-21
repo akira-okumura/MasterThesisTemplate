@@ -32,6 +32,9 @@ all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
 %.xbb: %.png
 	$(EXTRACTBB) $<
 
+%.xbb: %.jpg
+	$(EXTRACTBB) $<
+
 %.aux: %.tex
 	$(TEX) $(MAIN)
 
