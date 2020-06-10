@@ -1,7 +1,6 @@
 TEX := uplatex
 DVIPDFMX := dvipdfmx
 BIB := pbibtex
-EXTRACTBB := extractbb
 
 MAIN := main
 ABST := ISEE_abstract
@@ -35,7 +34,7 @@ all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
 	$(TEX) -output-directory=$(TEMPDIR) $(MAIN)
 
 $(BBL): $(MAIN).aux thesis.bib jecon.bst
-	cp -u $(BIBS) ./$(TEMPDIR)
+	cp $(BIBS) ./$(TEMPDIR)
 	$(TEX) -output-directory=$(TEMPDIR) $(MAIN)
 
 $(ABST).dvi: $(ABST).tex AuthorInfo.tex $(STYS) $(PRE).tex
@@ -50,7 +49,7 @@ $(COVER2).dvi: $(COVER2).tex AuthorInfo.tex $(STYS) $(PRE).tex
 $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(BBL)
 	mkdir -p $(TEMPDIR)
 	$(TEX) -output-directory=$(TEMPDIR) $(MAIN);
-	cp -u $(STYLEFILE) ./$(TEMPDIR)
+	cp $(STYLEFILE) ./$(TEMPDIR)
 	(cd $(TEMPDIR); $(BIB) -terse $(MAIN);)
 
 	if egrep 'No file $(TEMPDIR)/$(MAIN).toc.' $(TEMPDIR)/$(MAIN).log;\
@@ -67,12 +66,6 @@ $(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(BBL)
 	then\
 		$(TEX) -output-directory=$(TEMPDIR) $(MAIN);\
 	fi
-
-%.xbb: %.png
-	$(EXTRACTBB) $<
-
-%.xbb: %.pdf
-	$(EXTRACTBB) $<
 
 $(ABST).pdf: $(ABST).dvi
 	$(DVIPDFMX) -o $@ ./$(TEMPDIR)/$^
