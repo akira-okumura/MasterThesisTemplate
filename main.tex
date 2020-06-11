@@ -30,7 +30,8 @@
 %\linenumbers
 
 % PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
-\usepackage[dvipdfmx]{hyperref}
+% hidelinks を消すと、PDF 中のリンクを枠で囲む。ただし印刷もされてしまう。
+\usepackage[dvipdfmx,hidelinks]{hyperref}
 % PDF 内のしおりの文字化けを防ぐ
 \usepackage{pxjahyper}
 
