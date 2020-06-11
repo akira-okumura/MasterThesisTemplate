@@ -4,14 +4,15 @@ BIB := pbibtex
 
 MAIN := main
 ABST := ISEE_abstract
+AUTHOR_INFO := AuthorInfo
 PRE := preamble
 COVER := cover_page
 COVER2 := cover_page_copy
 TEXS := $(wildcard *.tex)
 TEXS := $(filter-out $(COVER).tex $(COVER)2.tex $(ABST).tex, $(TEXS))
 
-TEMPDIR := tmpMake
-STYLEFILE := jecon.bst
+BUILD_DIR := build
+BST := jecon.bst
 
 STYS := $(wildcard *.sty)
 FIGS := $(wildcard fig/*)
@@ -23,62 +24,54 @@ FIGS := $(filter-out fig/*~, $(FIGS))
 
 BIBS := $(wildcard *bib)
 
-BBL  := $(MAIN).bbl
+BBL  := $(BUILD_DIR)/$(MAIN).bbl
+
+CWD  := $(shell pwd)
 
 .PHONY: all clean
 
 all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
 
-%.aux: %.tex
-	mkdir -p $(TEMPDIR)
-	$(TEX) -output-directory=$(TEMPDIR) $(MAIN)
+# Avoid automatic deletion of intermidate files
+.PRECIOUS: $(BUILD_DIR)/%.dvi
 
-$(BBL): $(MAIN).aux thesis.bib jecon.bst
-	cp $(BIBS) ./$(TEMPDIR)
-	$(TEX) -output-directory=$(TEMPDIR) $(MAIN)
+$(BUILD_DIR):
+	mkdir -p $@
 
-$(ABST).dvi: $(ABST).tex AuthorInfo.tex $(STYS) $(PRE).tex
-	$(TEX) -output-directory=$(TEMPDIR) $(ABST)
+$(BUILD_DIR)/%.aux: %.tex $(BUILD_DIR)
+	$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null
 
-$(COVER).dvi: $(COVER).tex AuthorInfo.tex $(STYS) $(PRE).tex
-	$(TEX) -output-directory=$(TEMPDIR) $(COVER)
+$(BBL): $(BUILD_DIR)/$(MAIN).aux $(BIBS) $(BST)
+# pbibtex in Tex Live 2019 (macOS) uses the current working directory for search path,
+# but that in TeX Live 2018 (Linux) doesn't. So cd and BIBINPUTS/BSTINPUTS are needed.
+	cd $(BUILD_DIR);\
+	BIBINPUTS=$(CWD):${BIBINPUTS} BSTINPUTS=$(CWD):${BSTINPUTS} $(BIB) -terse $(MAIN);\
+	cd -
 
-$(COVER2).dvi: $(COVER2).tex AuthorInfo.tex $(STYS) $(PRE).tex
-	$(TEX) -output-directory=$(TEMPDIR) $(COVER2)
+$(BUILD_DIR)/%.dvi: %.tex $(AUTHOR_INFO).tex $(PRE).tex $(STYS)
+	$(TEX) -output-directory=$(BUILD_DIR) $<
 
-$(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(BBL)
-	mkdir -p $(TEMPDIR)
-	$(TEX) -output-directory=$(TEMPDIR) $(MAIN);
-	cp $(STYLEFILE) ./$(TEMPDIR)
-	(cd $(TEMPDIR); $(BIB) -terse $(MAIN);)
+$(BUILD_DIR)/$(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(BBL)
+	$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null
 
-	if egrep 'No file $(TEMPDIR)/$(MAIN).toc.' $(TEMPDIR)/$(MAIN).log;\
+	if egrep 'No file $(BUILD_DIR)/$(MAIN).toc.' $(BUILD_DIR)/$(MAIN).log;\
 	then\
-		$(TEX) -output-directory=$(TEMPDIR) $(MAIN);\
+		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null;\
 	fi
 
-	if egrep 'LaTeX Warning: There were undefined references.' $(TEMPDIR)/$(MAIN).log;\
+	if egrep 'LaTeX Warning: There were undefined references.' $(BUILD_DIR)/$(MAIN).log;\
 	then\
-		$(TEX) -output-directory=$(TEMPDIR) $(MAIN);\
+		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null;\
 	fi
 
-	if egrep 'There were undefined citations.' $(TEMPDIR)/$(MAIN).log;\
+	if egrep 'There were undefined citations.' $(BUILD_DIR)/$(MAIN).log;\
 	then\
-		$(TEX) -output-directory=$(TEMPDIR) $(MAIN);\
+		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null;\
 	fi
 
-$(ABST).pdf: $(ABST).dvi
-	$(DVIPDFMX) -o $@ ./$(TEMPDIR)/$^
-
-$(COVER).pdf: $(COVER).dvi
-	$(DVIPDFMX) -o $@ ./$(TEMPDIR)/$^
-
-$(COVER2).pdf: $(COVER2).dvi
-	$(DVIPDFMX) -o $@ ./$(TEMPDIR)/$^
-
-$(MAIN).pdf: $(MAIN).dvi
-	$(DVIPDFMX) -o $@ ./$(TEMPDIR)/$^
+%.pdf: $(BUILD_DIR)/%.dvi
+	$(DVIPDFMX) -o $@ $<
 
 clean:
-	rm -rf $(TEMPDIR)
-	rm -f *.pdf *.dvi *.aux *.log *.lot *.lof *.out *.toc tex/*.aux *~ src/*~ tex/*~ *.bbl *.blg
+	rm -rf $(BUILD_DIR)
+	rm -f *.pdf
