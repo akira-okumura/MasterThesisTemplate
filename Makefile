@@ -39,7 +39,7 @@ $(BUILD_DIR):
 	mkdir -p $@
 
 $(BUILD_DIR)/%.aux: %.tex $(BUILD_DIR)
-	$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null
+	$(TEX) -output-directory=$(BUILD_DIR) $(MAIN)
 
 $(BBL): $(BUILD_DIR)/$(MAIN).aux $(BIBS) $(BST)
 # pbibtex in Tex Live 2019 (macOS) uses the current working directory for search path,
@@ -52,21 +52,21 @@ $(BUILD_DIR)/%.dvi: %.tex $(AUTHOR_INFO).tex $(PRE).tex $(STYS)
 	$(TEX) -output-directory=$(BUILD_DIR) $<
 
 $(BUILD_DIR)/$(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(BBL)
-	$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null
+	$(TEX) -output-directory=$(BUILD_DIR) $(MAIN)
 
 	if egrep 'No file $(BUILD_DIR)/$(MAIN).toc.' $(BUILD_DIR)/$(MAIN).log;\
 	then\
-		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null;\
+		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN);\
 	fi
 
 	if egrep 'LaTeX Warning: There were undefined references.' $(BUILD_DIR)/$(MAIN).log;\
 	then\
-		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null;\
+		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN);\
 	fi
 
 	if egrep 'There were undefined citations.' $(BUILD_DIR)/$(MAIN).log;\
 	then\
-		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN) > /dev/null;\
+		$(TEX) -output-directory=$(BUILD_DIR) $(MAIN);\
 	fi
 
 %.pdf: $(BUILD_DIR)/%.dvi
