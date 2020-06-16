@@ -11,6 +11,10 @@ COVER2 := cover_page_copy
 TEXS := $(wildcard *.tex)
 TEXS := $(filter-out $(COVER).tex $(COVER)2.tex $(ABST).tex, $(TEXS))
 
+DIFF := latexdiff-vc -e utf-8 --git --flatten -t CFONT --force
+DIFFREV := HEAD
+DIFFMAIN := $(MAIN)-diff$(DIFFREV)
+
 BUILD_DIR := build
 BST := jecon.bst
 
@@ -25,10 +29,11 @@ FIGS := $(filter-out fig/*~, $(FIGS))
 BIBS := $(wildcard *bib)
 
 BBL  := $(BUILD_DIR)/$(MAIN).bbl
+DIFBBL  := $(BUILD_DIR)/$(DIFFMAIN).bbl
 
 CWD  := $(shell pwd)
 
-.PHONY: all clean
+.PHONY: all clean diff
 
 all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
 
@@ -74,4 +79,34 @@ $(BUILD_DIR)/$(MAIN).dvi: $(TEXS) $(STYS) $(FIGS) $(BBL)
 
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -f $(DIFFMAIN).pdf $(DIFFMAIN).tex
 	rm -f *.pdf
+
+# For latexdiff
+diff: $(BUILD_DIR) $(DIFFMAIN).pdf
+
+$(DIFFBBL): $(BUILD_DIR)/$(DIFFMAIN).aux $(BIBS) $(BST)
+	cd $(BUILD_DIR);\
+	BIBINPUTS=$(CWD):${BIBINPUTS} BSTINPUTS=$(CWD):${BSTINPUTS} $(BIB) -terse $(DIFFMAIN);\
+	cd -
+
+$(DIFFMAIN).tex: $(TEXS)
+	$(DIFF) -r $(DIFFREV) $(MAIN).tex
+
+$(BUILD_DIR)/$(DIFFMAIN).dvi: $(DIFFMAIN).tex $(STYS) $(FIGS) $(DIFFBBL)
+	$(TEX) -output-directory=$(BUILD_DIR) $(DIFFMAIN)
+
+	if egrep 'No file $(BUILD_DIR)/$(DIFFMAIN).toc.' $(BUILD_DIR)/$(DIFFMAIN).log;\
+	then\
+		$(TEX) -output-directory=$(BUILD_DIR) $(DIFFMAIN);\
+	fi
+
+	if egrep 'LaTeX Warning: There were undefined references.' $(BUILD_DIR)/$(DIFFMAIN).log;\
+	then\
+		$(TEX) -output-directory=$(BUILD_DIR) $(DIFFMAIN);\
+	fi
+
+	if egrep 'There were undefined citations.' $(BUILD_DIR)/$(DIFFMAIN).log;\
+	then\
+		$(TEX) -output-directory=$(BUILD_DIR) $(DIFFMAIN);\
+	fi

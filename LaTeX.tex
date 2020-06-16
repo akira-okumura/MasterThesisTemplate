@@ -212,3 +212,15 @@
 \section{\texttt{newcommand}}
 
 入力が長く、論文中で何度も繰り返し使うような入力はコマンドとして登録することができます。例えば\texttt{\bs{}HI\{\}}や\texttt{\bs{}bs\{\}}といったコマンドを\texttt{main.tex}で定義しており、これらの結果は「\HI{}」や「\bs{}」と表示されます。
+
+\section{\texttt{latexdiff}}
+
+修士論文の執筆中は必ずバックアップをとるようにするのは当然のこととして、\LaTeX{} のソースファイルなど一式を Git などのバージョン管理ソフトウェアでバージョン管理するようにしておきましょう。これは、指導教員に添削してもらう際に \texttt{latexdiff} コマンドを利用して、修正箇所・更新箇所を見やすくするためです。
+
+例えばこの修論テンプレートは GitHub 上で管理されており、同梱の\texttt{Makefile}を使って\\
+\texttt{\$ make diff}\\
+というコマンドを実行すると\texttt{main-diffHEAD.pdf}というファイルが生成されます。もし手元に\texttt{git clone}してある\LaTeX{}ファイルに修正が加えられている場合、この\texttt{main-diffHEAD.pdf}の中では削除箇所が小さい赤い明朝体で、追加箇所が青いゴシック体で表示されているはずです。この\texttt{Makefile}では Git のみに対応しています。
+
+Git の\texttt{HEAD}\footnote{最新の\texttt{commit}の場所です。}以外の\text{commit}と差分を取りたいときは、例えば\\
+\texttt{\$ make diff DIFFREV=3303f9e}\\
+とすれば、\texttt{main-diff3303f9e.pdf}というファイルが生成されます。
