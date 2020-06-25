@@ -29,7 +29,7 @@ FIGS := $(filter-out fig/*~, $(FIGS))
 BIBS := $(wildcard *bib)
 
 BBL  := $(BUILD_DIR)/$(MAIN).bbl
-DIFBBL  := $(BUILD_DIR)/$(DIFFMAIN).bbl
+DIFFBBL  := $(BUILD_DIR)/$(DIFFMAIN).bbl
 
 CWD  := $(shell pwd)
 
