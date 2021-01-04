@@ -93,6 +93,9 @@ $(DIFFBBL): $(BUILD_DIR)/$(DIFFMAIN).aux $(BIBS) $(BST)
 $(DIFFMAIN).tex: $(TEXS)
 	$(DIFF) -r $(DIFFREV) $(MAIN).tex
 
+$(BUILD_DIR)/$(DIFFMAIN).aux:
+	$(TEX) -output-directory=$(BUILD_DIR) $(DIFFMAIN)
+
 $(BUILD_DIR)/$(DIFFMAIN).dvi: $(DIFFMAIN).tex $(STYS) $(FIGS) $(DIFFBBL)
 	$(TEX) -output-directory=$(BUILD_DIR) $(DIFFMAIN)
 
