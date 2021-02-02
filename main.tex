@@ -50,6 +50,10 @@
 % hidelinks を消すと PDF 中のリンクを枠で囲む。
 %\usepackage[hidelinks]{hyperref}
 
+% PDF 内のしおりの文字化けを防ぐ
+% 先頭に \RequirePackage{plautopatch} を追加すれば 2020 年以降の TeX 環境では不要
+\usepackage{pxjahyper}
+
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
 \newcommand{\ion}[2]{#1$\;${\small\rmfamily\@Roman{#2}}\relax}%
