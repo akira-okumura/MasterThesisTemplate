@@ -1,11 +1,13 @@
-\documentclass[twoside,openright,a4paper,papersize,uplatex]{jsbook}
+\RequirePackage{plautopatch}
+\documentclass[twoside,openright,a4paper,papersize,uplatex,dvipdfmx]{jsbook}
 % uplatex オプションを指定し、ユニコード対応に。ただだし、uplatex でコンパイルすること。
+% ここで dvipdfmx を指定すれば、graphicx などでは指定しなくて良い。
 
 % 修論本体と表紙で共通で必要となる設定
 \input{preamble}
 
 % 画像の取り扱いに必要
-\usepackage[dvipdfmx]{graphicx}
+\usepackage{graphicx}
 
 % 表でセルを複数列で結合する
 \usepackage{multicol}
@@ -33,10 +35,20 @@
 %\linenumbers
 
 % PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
-% hidelinks を消すと、PDF 中のリンクを枠で囲む。ただし印刷もされてしまう。
-\usepackage[dvipdfmx,hidelinks]{hyperref}
-% PDF 内のしおりの文字化けを防ぐ
-\usepackage{pxjahyper}
+% 印刷時に色が出るかどうかは、使用する PDF viewer の挙動による。
+% 紙媒体で修論を提出する場合、文字色は黒にするのが適切なので要注意。
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+% 色を個別に変更したい場合の例（あまり勧めない）
+%\hypersetup{
+%    colorlinks=true,
+%    citecolor=red,
+%    linkcolor=blue,
+%    urlcolor=green,
+%}
+
+% こうするだけだと、文字に色をつけないが、リンク機能があると判断しにくい。
+% hidelinks を消すと PDF 中のリンクを枠で囲む。
+%\usepackage[hidelinks]{hyperref}
 
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
@@ -83,6 +95,7 @@
 \include{WhatYouDid}
 \include{LaTeX}
 \include{Plagiarism}
+\include{Color}
 \include{Discussion}
 \include{Conclusion}
 \include{Appendix}
