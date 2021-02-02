@@ -50,6 +50,9 @@
 % hidelinks を消すと PDF 中のリンクを枠で囲む。
 %\usepackage[hidelinks]{hyperref}
 
+% hyperref が生成するしおりの文字化けを防ぐ。
+\usepackage[dvipdfmx]{pxjahyper}
+
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
 \newcommand{\ion}[2]{#1$\;${\small\rmfamily\@Roman{#2}}\relax}%
