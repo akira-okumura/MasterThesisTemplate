@@ -5,8 +5,8 @@
 \addtolength{\textwidth}{-5truemm}
 \addtolength{\oddsidemargin}{5truemm}
 
-% 同梱の ISEE 用の表紙テンプレ
-\usepackage{thesis_cover}
+% % 同梱の ISEE 用の表紙テンプレ
+\usepackage{style/thesis_cover}
 
 % OTF フォントを使えるようにし、複数のウェイトも使用可能にする。
 % これがないと、Mac のヒラギノ環境で使われる角ゴが太すぎてみっともない。
@@ -17,14 +17,14 @@
 
 % uplatex の場合に必要な処理 
 \usepackage[utf8]{inputenc} % エンコーディングが UTF8 であることを明示する。
-\usepackage[prefernoncjk]{pxcjkcat} % アクセントつきラテン文字を欧文扱いにする
+% \usepackage[prefernoncjk]{pxcjkcat} % アクセントつきラテン文字を欧文扱いにする
 
 % Helvetica と Times を sf と rm のそれぞれで使う。
 % default だとバランスが悪いので、日本語に合わせて文字の大きさを調整する。
 \usepackage[scaled=1.05,helvratio=0.95]{newtxtext}
 
 % 色
-\usepackage[dvipdfmx]{color}
+% \usepackage[dvipdfmx]{color}
 
 % latexdiff
 % 実際の修論には入れる必要なし

@@ -1,13 +1,13 @@
 \RequirePackage{plautopatch}
-\documentclass[twoside,openright,a4paper,papersize,uplatex,dvipdfmx]{jsbook}
-% uplatex オプションを指定し、ユニコード対応に。ただだし、uplatex でコンパイルすること。
-% ここで dvipdfmx を指定すれば、graphicx などでは指定しなくて良い。
+\documentclass[twoside,openright,a4paper,papersize,dvipdfmx]{jsbook}
+\usepackage[]{multirow}
+\usepackage{graphicx}
+\usepackage{siunitx}
+% easy-todoは目次の体裁設定と競合するため使用不可
+\usepackage{todonotes}
 
 % 修論本体と表紙で共通で必要となる設定
-\input{preamble}
-
-% 画像の取り扱いに必要
-\usepackage{graphicx}
+\input{style/preamble}
 
 % 表でセルを複数列で結合する
 \usepackage{multicol}
@@ -26,13 +26,13 @@
 % bibliography を目次に追加
 \usepackage[nottoc,notlot,notlof]{tocbibind}
 
+% 行番号を表示する。添削時のみに使用し，提出時はコメントアウト
+%\usepackage{lineno}
+%\linenumbers
+
 % subfigure 環境で、(a)、(b) などの番号を左上に表示する。宇宙系の分野ではこれが一般的なはず。
 \usepackage[nooneline]{subfigure}
 \subfiguretopcaptrue
-
-% 行番号を表示する。添削時のみに使い、事務提出版ではコメントアウトする
-%\usepackage{lineno}
-%\linenumbers
 
 % PDF 内で外部リンクや文書内リンクを生成したい場合に使う（好みによる）
 % 印刷時に色が出るかどうかは、使用する PDF viewer の挙動による。
@@ -46,14 +46,6 @@
 %    urlcolor=green,
 %}
 
-% こうするだけだと、文字に色をつけないが、リンク機能があると判断しにくい。
-% hidelinks を消すと PDF 中のリンクを枠で囲む。
-%\usepackage[hidelinks]{hyperref}
-
-% PDF 内のしおりの文字化けを防ぐ
-% 先頭に \RequirePackage{plautopatch} を追加すれば 2020 年以降の TeX 環境では不要
-\usepackage{pxjahyper}
-
 % newcommand を使うことで、繰り返し使う長ったらしい入力を簡単にすることができる
 \makeatletter
 \newcommand{\ion}[2]{#1$\;${\small\rmfamily\@Roman{#2}}\relax}%
@@ -65,48 +57,53 @@
 \newcommand{\ugreen}[1]{\textcolor{green}{\underline{\textcolor{black}{#1}}}}
 \newcommand{\ublue}[1]{\textcolor{blue}{\underline{\textcolor{black}{#1}}}}
 
-% 氏名などの情報が入っているファイル。各自で編集。
-\include{AuthorInfo}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%　ここから本体　%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 \frontmatter
 
+% 氏名などの情報が入っているファイル。各自で編集。
+\include{contents/AuthorInfo}
+
+% 表紙
 \maketitle
 
 % これを入れることでページ番号が表示されない。
 \thispagestyle{empty}
 
-% abstract 環境は jsbook では「概要」と表示してくれないため、手動で表示させる。
-% 参照 http://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2121
-\begin{center}
-  {\large \sf 概要}
-\end{center}
-
-\input{Abstract}
+% 概要
+\input{contents/Abstract}
 
 この文書の\LaTeX {}ファイルは、\url{https://github.com/akira-okumura/MasterThesisTemplate}から入手可能です。
 
+% TODO list (提出時にコメントアウト)
+\listoftodos
+
+% 目次
 \tableofcontents
 \listoffigures
 \listoftables
 
+% ここから内容に入っていく
 \mainmatter
 
 % include を使うことで、別ファイルに分割することができます。
-\include{Introduction}
-\include{Review}
-\include{WhatYouDid}
-\include{LaTeX}
-\include{Plagiarism}
-\include{Color}
-\include{Discussion}
-\include{Conclusion}
-\include{Appendix}
-\include{Acknowledgments}
+\include{contents/Introduction}
+\include{contents/Review}
+\include{contents/WhatYouDid}
+\include{contents/LaTeX}
+\include{contents/Plagiarism}
+\include{contents/Color}
+\include{contents/Discussion}
+\include{contents/Conclusion}
+\include{contents/Appendix}
+\include{contents/Acknowledgments}
 
 \renewcommand{\bibname}{引用文献}
-\bibliographystyle{jecon}
+\bibliographystyle{style/jecon}
 \bibliography{thesis}
 \label{page:bib}
 

@@ -1,56 +1,39 @@
 \makeatletter
 
-\def\StudentIdNumber#1{\def\@StudentIdNumber{#1}} % 学籍番号
-\def\seireki#1{\def\@seireki{#1}} % 西暦での年度
-\def\seifuku#1{\def\@seifuku{#1}} % 正本か副本か
-\def\supervisor#1{\def\@supervisor{#1}} % 指導教員
-\def\cosupervisor#1{\def\@cosupervisor{#1}} % 副指導教員
-\def\labname#1{\def\@labname{#1}} % 研究室名
+\newcommand{\articletype}[1]{\def\@articletype{#1}} % 修士論文か学士論文か
+\newcommand{\seireki}[1]{\def\@seireki{#1}} % 西暦での年度
+\newcommand{\StudentGrade}[1]{\def\@StudentGrade{#1}} % 学年
+\newcommand{\StudentIdNumber}[1]{\def\@StudentIdNumber{#1}} % 学籍番号
+\newcommand{\departmentname}[1]{\def\@departmentname{#1}} % 学科名
+\newcommand{\labname}[1]{\def\@labname{#1}} % 研究室名
+\renewcommand{\title}[1]{\def\@title{#1}} % タイトル
+\renewcommand{\author}[1]{\def\@author{#1}} % 著者名
+\renewcommand{\date}[1]{\def\@date{#1}} % 日付
 
-\renewcommand{\maketitle}{%
-  \begin{titlepage}%
+
+\renewcommand{\maketitle}{
+  \begin{titlepage}
     \let\footnotesize\small
     \let\footnoterule\relax
     \let\footnote\thanks
     \null\vfil
     \vskip 20\p@
-    \begin{center}%
-      {\Large {\@seireki}年度　修士論文 \par}%
-      {\Large \@seifuku \par}%
-      \vskip 12em%
-      {\LARGE \@title \par}%
-      \vskip 15em%
-      {\large
-        \begin{tabular}[t]{c}%
-          名古屋大学大学院理学研究科\\
-          素粒子宇宙物理学専攻宇宙地球物理系\\
-          宇宙線物理学研究室
-        \end{tabular}\par}%
-      \vskip 5em%
-      {\large
-        \begin{tabular}[t]{c}%
-          博士課程（前期課程）2年\\
-          学籍番号 \@StudentIdNumber \\
-          \\
-            {\Large \@author}
-        \end{tabular}\par}%
-      \vskip 1.5em
-      {\large \@date \par}%
-    \end{center}%
+    \begin{center}
+      {\Large {\@seireki}年度　{\@articletype} \par}
+      {\vskip 12em}
+      {\LARGE {\@title} \par}
+      {\vskip 15em}
+      {\large {芝浦工業大学{\@departmentname}\\{\@labname}} \par}
+      {\vskip 5em}
+      {\large {\@StudentGrade} \par}
+      {\large {学籍番号} {\@StudentIdNumber} \par}
+      {\vskip 1.5em}
+      {\Large {\@author} \par}
+      {\vskip 1.5em}
+      {\large \@date \par}
+    \end{center}
     \par
-    \@thanks\vfil\null
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  \global\let\@author\@empty
-  \global\let\@date\@empty
-  \global\let\@title\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}%
+  \end{titlepage}
+}
 
 \makeatother
