@@ -1,0 +1,37 @@
+{
+  "latex-workshop.latex.recipes": [
+      {  
+          "name": "latexmk",  
+          "tools": [  
+            "latexmk"  
+          ]  
+      }
+  ],
+  "latex-workshop.latex.tools": [
+      {
+          "name": "latexmk",
+          "command": "latexmk",
+          "args": [
+              "-silent",
+              "-interaction=nonstopmode",
+              "-outdir=%OUTDIR%",
+              "%DOCFILE%"
+          ]
+      }
+  ],
+  "latex-workshop.latex.outDir": "%DIR%\\out",
+  "latex-workshop.latex.clean.enabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+      "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot", "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo", "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.synctex.gz",
+      "_minted*", "*.nav", "*.snm", "*.vrb",
+      "*.run.xml","*.dvi","*.bcf"
+  ],
+
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoClean.run": "onFailed",
+ 
+  "[latex]": {
+    "editor.wordWrap": "on"
+  }
+}
