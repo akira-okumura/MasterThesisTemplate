@@ -50,7 +50,7 @@ $(BBL): $(BUILD_DIR)/$(MAIN).aux $(BIBS) $(BST)
 # pbibtex in Tex Live 2019 (macOS) uses the current working directory for search path,
 # but that in TeX Live 2018 (Linux) doesn't. So cd and BIBINPUTS/BSTINPUTS are needed.
 	cd $(BUILD_DIR);\
-	BIBINPUTS=$(CWD):${BIBINPUTS} BSTINPUTS=$(CWD):${BSTINPUTS} $(BIB) -terse $(MAIN);\
+	BIBINPUTS='$(CWD):${BIBINPUTS}' BSTINPUTS='$(CWD):${BSTINPUTS}' $(BIB) -terse $(MAIN);\
 	cd -
 
 $(BUILD_DIR)/%.dvi: %.tex $(AUTHOR_INFO).tex $(PRE).tex $(STYS)
@@ -87,7 +87,7 @@ diff: $(BUILD_DIR) $(DIFFMAIN).pdf
 
 $(DIFFBBL): $(BUILD_DIR)/$(DIFFMAIN).aux $(BIBS) $(BST)
 	cd $(BUILD_DIR);\
-	BIBINPUTS=$(CWD):${BIBINPUTS} BSTINPUTS=$(CWD):${BSTINPUTS} $(BIB) -terse $(DIFFMAIN);\
+	BIBINPUTS='$(CWD):${BIBINPUTS}' BSTINPUTS='$(CWD):${BSTINPUTS}' $(BIB) -terse $(DIFFMAIN);\
 	cd -
 
 $(DIFFMAIN).tex: $(TEXS)
