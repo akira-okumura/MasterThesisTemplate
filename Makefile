@@ -1,6 +1,6 @@
 TEX := uplatex
 DVIPDFMX := dvipdfmx
-BIB := pbibtex
+BIB := upbibtex
 
 MAIN := main
 ABST := ISEE_abstract
