@@ -1,10 +1,26 @@
+% (u)pLaTeX 非互換なパッケージ使用時に自動でパッチが適用される
 \RequirePackage{plautopatch}
-\documentclass[twoside,openright,a4paper,papersize,uplatex,dvipdfmx]{jsbook}
+
 % uplatex オプションを指定し、ユニコード対応に。ただし、uplatex でコンパイルすること。
 % ここで dvipdfmx を指定すれば、graphicx などでは指定しなくて良い。
+\documentclass[twoside,openright,a4paper,papersize,uplatex,dvipdfmx]{jsbook}
 
 % 修論本体と表紙で共通で必要となる設定
 \input{preamble}
+
+% 引用文献の形式を Okumura (2019) から [1] のように変更する場合はコメントを外す
+%\def\bynumber{1}
+
+% citep や citet を有効にする
+\ifdefined\bynumber
+\usepackage[square,numbers]{natbib} % \bynumber が有効の場合は [1] のようにする
+\else
+\usepackage{natbib}
+% (Okumura, 2009) などを (Okumura 2009) とする
+% 日本語文章で全角丸括弧の表示にし、かつ \inhibitglue で役物同士の字間を適切にする。
+% https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2349
+\setcitestyle{aysep={},notesep={},open={\inhibitglue（},close={）\inhibitglue}}
+\fi
 
 % 画像の取り扱いに必要
 \usepackage{graphicx}
@@ -14,14 +30,6 @@
 
 % 数式の機能を拡張
 \usepackage{amsmath}
-
-% citep や citet を有効にする
-\usepackage{natbib}
-
-% (Okumura, 2009) などを (Okumura 2009) とする
-% 日本語文章で全角丸括弧の表示にし、かつ \inhibitglue で役物同士の字間を適切にする。
-% https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2349
-\setcitestyle{aysep={},notesep={},open={\inhibitglue（},close={）\inhibitglue}}
 
 % bibliography を目次に追加
 \usepackage[nottoc,notlot,notlof]{tocbibind}
@@ -101,13 +109,19 @@
 \include{CorrectionAndCheck}
 \include{Plagiarism}
 \include{Color}
+\include{Writing}
 \include{Discussion}
 \include{Conclusion}
 \include{Appendix}
 \include{Acknowledgments}
 
 \renewcommand{\bibname}{引用文献}
-\bibliographystyle{jecon}
+%\bibliographystyle{jecon}
+\ifdefined\bynumber
+\bibliographystyle{jecon6.5.1_by_number}
+\else
+\bibliographystyle{jecon6.5.1_by_name}
+\fi
 \bibliography{thesis}
 \label{page:bib}
 
