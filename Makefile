@@ -16,7 +16,7 @@ DIFFREV := HEAD
 DIFFMAIN := $(MAIN)-diff$(DIFFREV)
 
 BUILD_DIR := build
-BST := jecon.bst
+BST := jecon6.5.1_by_name.bst jecon6.5.1_by_number.bst
 
 STYS := $(wildcard *.sty)
 FIGS := $(wildcard fig/*)
