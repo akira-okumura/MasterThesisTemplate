@@ -6,10 +6,8 @@ MAIN := main
 ABST := ISEE_abstract
 AUTHOR_INFO := AuthorInfo
 PRE := preamble
-COVER := cover_page
-COVER2 := cover_page_copy
 TEXS := $(wildcard *.tex)
-TEXS := $(filter-out $(COVER).tex $(COVER)2.tex $(ABST).tex, $(TEXS))
+TEXS := $(filter-out $(ABST).tex, $(TEXS))
 
 DIFF := latexdiff-vc -e utf-8 --git --flatten -t CFONT --force
 DIFFREV := HEAD
@@ -35,7 +33,7 @@ CWD  := $(shell pwd)
 
 .PHONY: all clean diff
 
-all: $(MAIN).pdf $(ABST).pdf $(COVER).pdf $(COVER2).pdf
+all: $(MAIN).pdf $(ABST).pdf
 
 # Avoid automatic deletion of intermidate files
 .PRECIOUS: $(BUILD_DIR)/%.dvi

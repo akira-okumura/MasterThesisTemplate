@@ -50,7 +50,5 @@ Mac の場合、[TeXShop](http://pages.uoregon.edu/koch/texshop/) を使うの�
 $ open -a Skim main.pdf
 ```
 
-論文本体の`main.pdf`の他に、宇宙地球環境研究所の論文提出時に必要となる次の 3 つの PDF も同時に生成されます。
-- `cover_page.pdf`：バインダーに貼り付ける「正本」用の表紙
-- `cover_page_copy.pdf`：バインダーに貼り付ける「副本」用の表紙
+論文本体の`main.pdf`の他に、宇宙地球環境研究所の論文提出時に必要となる次の PDF も同時に生成されます。
 - `ISEE_abstarct.pdf`：日本語の修士論文要旨（ここには、論文の題目や概要が自動的に LaTeX ファイルから流し込まれます）
