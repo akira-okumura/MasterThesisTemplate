@@ -52,3 +52,14 @@ $ open -a Skim main.pdf
 
 論文本体の`main.pdf`の他に、宇宙地球環境研究所の論文提出時に必要となる次の PDF も同時に生成されます。
 - `ISEE_abstarct.pdf`：日本語の修士論文要旨（ここには、論文の題目や概要が自動的に LaTeX ファイルから流し込まれます）
+
+## Overleaf での使い方
+
+[Overleaf](https://www.overleaf.com/) でこのテンプレートを使用する場合、次の手順を踏んでください。
+
+1. [project](https://www.overleaf.com/project) から New Project > Blank Project を選択し、新しいプロジェクトを作成する。
+1. 本レポジトリのファイルを全てアップロードし、Overleaf の自動作成した `main.tex` は置き換える。
+1. Menu > Compiler で LaTeX を選択する。
+1. 修論本体をコンパイする際は、Menu > Main document で `main.tex` を選択し、論文要旨をコンパイルするときは `ISEE_abstract.tex` を選択する。
+
+実際に Overleaf のプロジェクトにした例は[ここ](https://www.overleaf.com/read/hkpvdrmpdztq#673380)から見ることができます。
