@@ -55,7 +55,7 @@ $ open -a Skim main.pdf
 
 ## Overleaf での使い方
 
-[Overleaf](https://www.overleaf.com/) でこのテンプレートを使用する場合、次の手順を踏んでください。
+[Overleaf](https://www.overleaf.com/) でこのテンプレートを使用する場合、次の手順を踏んでください。（※数十ページを超える修論では、Overleaf の無料版ではコンパイル時にタイムアウトする場合があります。有料版を使うか、自分で LaTeX 環境を構築してください。）
 
 1. [project](https://www.overleaf.com/project) から New Project > Blank Project を選択し、新しいプロジェクトを作成する。
 1. 本レポジトリのファイルを全てアップロードし、Overleaf の自動作成した `main.tex` は置き換える。
